@@ -1,10 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ComponentExample } from "@/components/component-example";
+import { Navbar } from '@/components/web/navbar'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute('/')({ component: App })
 
 function App() {
-return (
-  <ComponentExample />
-);
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+    </div>
+  )
 }
