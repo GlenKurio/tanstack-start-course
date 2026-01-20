@@ -3,11 +3,9 @@ import { Button, buttonVariants } from '../ui/button'
 import { ThemeToggle } from './theme-toggle'
 import { authClient } from '@/lib/auth-client'
 import { toast } from 'sonner'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { sessionQueryOptions } from '@/lib/api'
 
 export function Navbar() {
-  const { data: session } = useSuspenseQuery(sessionQueryOptions)
+  const { data: session, isPending } = authClient.useSession()
 
   const handleSignOut = async () => {
     await authClient.signOut({
@@ -35,7 +33,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          {session ? (
+          {isPending ? null : session ? (
             <>
               <Button onClick={handleSignOut} variant="secondary">
                 Logout
